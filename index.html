@@ -6,10 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
+    <style>
+        #gameScreen{
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div id="initialScreen">
+        <div>
+            <h1>The Milkman</h1>
+            <button
+                type="submit"
+                id="newGameButton"
+            >
+                Create New Game
+            </button>
+            <div>OR</div>
+            <div>
+                <input 
+                    input="text"
+                    placeholder="Enter Game Code"
+                    id="gameCodeInput"
+                />
+            </div>
+            <button
+                type="submit"
+                id="joinGameButton"
+            >
+                Join Game
+            </button>
+        </div>
+    </div>
     <div id="gameScreen" >
         <div id="canvasContainer">
+            <h1>Your Game Code is:<span id='gameCodeDisplay'></span></h1>
           <canvas id="canvas"></canvas>
         </div>
     </div>
