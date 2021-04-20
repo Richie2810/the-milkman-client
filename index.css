@@ -1,0 +1,10 @@
+#gameScreen{
+    height: 100%;
+}
+
+#canvasContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
