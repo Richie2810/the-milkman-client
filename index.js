@@ -12,6 +12,7 @@ socket.on("gameCode", handleGameCode);
 socket.on("unknownCode", handleUnknownCode);
 socket.on("gameScore", handleScore);
 socket.on("tooManyPlayers", handleTooManyPlayers);
+socket.on("message", handleMessage);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -19,21 +20,28 @@ const newGameForm = document.getElementById("newGameForm");
 const joinGameForm = document.getElementById("joinGameForm");
 const gameCodeInput = document.getElementById("gameCodeInput");
 const gameCodeDisplay = document.getElementById("gameCodeDisplay");
+const nameNewGame = document.getElementById("nameNewGame");
+const nameJoinGame = document.getElementById("nameJoinGame");
+const chatMessages = document.querySelector(".chatMessages");
+const chatForm = document.getElementById("chatForm");
 
 newGameForm.addEventListener("submit", newGame);
 joinGameForm.addEventListener("submit", joinGame);
+chatForm.addEventListener("submit", submitMessage);
 
 function newGame(e) {
   e.preventDefault();
-  socket.emit("newGame");
+  const playerName = nameNewGame.value;
+  socket.emit("newGame", playerName);
   init();
 }
 
 function joinGame(e) {
   e.preventDefault();
+  const playerName = nameJoinGame.value;
   const code = gameCodeInput.value;
   console.log(code);
-  socket.emit("joinGame", code);
+  socket.emit("joinGame", playerName, code);
   init();
 }
 
@@ -140,7 +148,51 @@ function handleScore(data) {
   }
   data = JSON.parse(data);
   const playersScore = data.map((player) => player.score);
-  //  playerOneScore.innerText = playersScore[0]
-  //  playerTwoScore.innerText = playerScore[1]
+  playerOneScore.innerText = playersScore[0];
+  playerTwoScore.innerText = playersScore[1];
   console.log(playersScore[0]);
+}
+
+function handleMessage(message) {
+  outputMessage(message);
+
+  // Scroll down
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Message submit
+function submitMessage(e) {
+  e.preventDefault();
+
+  // Get message text
+  let message = e.target.elements.msg.value;
+
+  message = message.trim();
+
+  if (!message) {
+    return;
+  }
+
+  // Emit message to server
+  socket.emit("chatMessage", message);
+
+  // Clear input
+  e.target.elements.msg.value = "";
+  e.target.elements.msg.focus();
+}
+
+// Output message to DOM
+function outputMessage(message) {
+  const div = document.createElement("div");
+  div.classList.add("message");
+  const p = document.createElement("p");
+  p.classList.add("meta");
+  p.innerText = `${message.playername} `;
+  p.innerHTML += `<span>${message.time}</span>`;
+  div.appendChild(p);
+  const para = document.createElement("p");
+  para.classList.add("text");
+  para.innerText = message.text;
+  div.appendChild(para);
+  chatMessages.appendChild(div);
 }
