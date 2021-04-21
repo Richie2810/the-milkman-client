@@ -70,8 +70,8 @@ function paintGame(state) {
   ctx.fillStyle = FOOD_COLOUR;
   ctx.fillRect(food.x * size, food.y * size, size, size);
 
-  paintPlayer(state.players[0], size, SNAKE_COLOUR);
-  paintPlayer(state.players[1], size, 'red');
+  paintPlayer(state.players[0], size, PLAYER_1);
+  paintPlayer(state.players[1], size, PLAYER_2);
 }
 
 function paintPlayer(playerState, size, colour) {
@@ -114,9 +114,9 @@ function handleGameCode(gameCode) {
   gameCodeDisplay.innerText = gameCode;
 }
 
-function handleUnknownCode() {
+function handleUnknownCode(room) {
   reset();
-  alert('Unknown Game Code')
+  alert('Unknown Game Code', room)
 }
 
 function handleTooManyPlayers() {
