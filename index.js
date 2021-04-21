@@ -56,8 +56,8 @@ function init() {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
 
-  canvas.width = 800;
-  canvas.height = 500;
+  canvas.width = 600;
+  canvas.height = 600;
 
   ctx.fillStyle = BG_COLOUR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -148,8 +148,8 @@ function handleScore(data) {
   }
   data = JSON.parse(data);
   const playersScore = data.map((player) => player.score);
-  playerOneScore.innerText = playersScore[0];
-  playerTwoScore.innerText = playersScore[1];
+  playerOneScore.innerText = playersScore[0]
+  playerTwoScore.innerText = playersScore[1]
   console.log(playersScore[0]);
 }
 
