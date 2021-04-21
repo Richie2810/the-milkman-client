@@ -1,38 +1,39 @@
-const BG_COLOUR = '#001b47';
-const PLAYER_1 = '#1cff3e';
-const PLAYER_2 = '#8773d9';
-const FOOD_COLOUR = '#ffee00';
+const BG_COLOUR = "#001b47";
+const PLAYER_1 = "#1cff3e";
+const PLAYER_2 = "#8773d9";
+const FOOD_COLOUR = "#ffee00";
 
-const socket = io('http://localhost:3000')
+const socket = io("http://localhost:3000");
 
-socket.on('init', handleInit);
-socket.on('gameState', handleGameState);
-socket.on('gameOver', handleGameOver);
-socket.on('gameCode', handleGameCode);
-socket.on('unknownCode', handleUnknownCode);
-socket.on('gameScore', handleScore);
-socket.on('tooManyPlayers', handleTooManyPlayers);
+socket.on("init", handleInit);
+socket.on("gameState", handleGameState);
+socket.on("gameOver", handleGameOver);
+socket.on("gameCode", handleGameCode);
+socket.on("unknownCode", handleUnknownCode);
+socket.on("gameScore", handleScore);
+socket.on("tooManyPlayers", handleTooManyPlayers);
 
-const gameScreen = document.getElementById('gameScreen');
-const initialScreen = document.getElementById('initialScreen');
-const newGameBtn = document.getElementById('newGameButton');
-const joinGameBtn = document.getElementById('joinGameButton');
-const gameCodeInput = document.getElementById('gameCodeInput');
-const gameCodeDisplay = document.getElementById('gameCodeDisplay');
+const gameScreen = document.getElementById("gameScreen");
+const initialScreen = document.getElementById("initialScreen");
+const newGameForm = document.getElementById("newGameForm");
+const joinGameForm = document.getElementById("joinGameForm");
+const gameCodeInput = document.getElementById("gameCodeInput");
+const gameCodeDisplay = document.getElementById("gameCodeDisplay");
 
-newGameBtn.addEventListener('click', newGame);
-joinGameBtn.addEventListener('click', joinGame);
+newGameForm.addEventListener("submit", newGame);
+joinGameForm.addEventListener("submit", joinGame);
 
-
-function newGame() {
-  socket.emit('newGame');
+function newGame(e) {
+  e.preventDefault();
+  socket.emit("newGame");
   init();
 }
 
-function joinGame() {
+function joinGame(e) {
+  e.preventDefault();
   const code = gameCodeInput.value;
-  console.log(code)
-  socket.emit('joinGame', code);
+  console.log(code);
+  socket.emit("joinGame", code);
   init();
 }
 
@@ -44,20 +45,21 @@ function init() {
   initialScreen.style.display = "none";
   gameScreen.style.display = "block";
 
-  canvas = document.getElementById('canvas');
-  ctx = canvas.getContext('2d');
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
 
-  canvas.width = canvas.height = 600;
+  canvas.width = 800;
+  canvas.height = 500;
 
   ctx.fillStyle = BG_COLOUR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  document.addEventListener('keydown', keydown);
+  document.addEventListener("keydown", keydown);
   gameActive = true;
 }
 
 function keydown(e) {
-  socket.emit('keydown', e.keyCode);
+  socket.emit("keydown", e.keyCode);
 }
 
 function paintGame(state) {
@@ -105,9 +107,9 @@ function handleGameOver(data) {
   gameActive = false;
 
   if (data.winner === playerNumber) {
-    alert('You Win!');
+    alert("You Win!");
   } else {
-    alert('You Lose :(');
+    alert("You Lose :(");
   }
 }
 
@@ -117,28 +119,28 @@ function handleGameCode(gameCode) {
 
 function handleUnknownCode(room) {
   reset();
-  alert('Unknown Game Code', room)
+  alert("Unknown Game Code", room);
 }
 
 function handleTooManyPlayers() {
   reset();
-  alert('This game is already in progress');
+  alert("This game is already in progress");
 }
 
 function reset() {
   playerNumber = null;
-  gameCodeInput.value = '';
+  gameCodeInput.value = "";
   initialScreen.style.display = "block";
   gameScreen.style.display = "none";
 }
 
 function handleScore(data) {
-  if(!gameActive){
-    return
+  if (!gameActive) {
+    return;
   }
-   data = JSON.parse(data)
-   const playersScore = data.map(player => player.score)
+  data = JSON.parse(data);
+  const playersScore = data.map((player) => player.score);
   //  playerOneScore.innerText = playersScore[0]
   //  playerTwoScore.innerText = playerScore[1]
-   console.log(playersScore[0])
+  console.log(playersScore[0]);
 }
