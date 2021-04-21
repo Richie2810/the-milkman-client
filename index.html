@@ -1,50 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Document</title>
     <style>
-        #gameScreen{
-            display: none;
-        }
+      #gameScreen {
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="initialScreen">
-        <div>
-            <h1>The Milkman</h1>
-            <button
-                type="submit"
-                id="newGameButton"
-            >
-                Create New Game
-            </button>
-            <div>OR</div>
-            <div>
-                <input 
-                    input="text"
-                    placeholder="Enter Game Code"
-                    id="gameCodeInput"
-                />
+      <div class="initialContainer">
+        <header class="initialHeader">
+          <h1>The Milkman</h1>
+        </header>
+        <main class="initialMain">
+          <form id="newGameForm">
+            <div class="formItem">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter name"
+                required
+              />
             </div>
-            <button
-                type="submit"
-                id="joinGameButton"
-            >
-                Join Game
-            </button>
-        </div>
+            <button type="submit" class="btn">Create new game</button>
+          </form>
+          <p id="or">or</p>
+          <form id="joinGameForm">
+            <div class="formItem">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter name"
+                required
+              />
+            </div>
+            <div class="formItem">
+              <label for="gameCode">Game code</label>
+              <input
+                type="text"
+                name="gameCode"
+                id="gameCode"
+                placeholder="Enter game code"
+                required
+              />
+            </div>
+            <button type="submit" class="btn">Join game</button>
+          </form>
+        </main>
+      </div>
     </div>
-    <div id="gameScreen" >
-        <div id="canvasContainer">
-            <h1>Your Game Code is:<span id='gameCodeDisplay'></span></h1>
-          <canvas id="canvas"></canvas>
-        </div>
+    <div id="gameScreen">
+      <div class="gameContainer">
+        <header class="gameHeader">
+          <h1>The Milkman</h1>
+          <h3>Your game code is:<span id="gameCodeDisplay"></span></h1>
+        </header>
+        <main class="gameMain">
+          <div id="canvasContainer">
+            <div class="playerScores">
+                <p id="scoresTitle">Scores</p>
+                <div><p>Player 1</p><p class="score" id="playerOneScore">0</p></div>
+                <div><p>Player 2</p><p class="score" id="playerTwoScore">0</p></div>
+                <div><p>Player 3</p><p class="score" id="playerThreeScore">0</p></div>
+                <div><p>Player 4</p><p class="score" id="playerFourScore">0</p></div>
+            </div>
+            <canvas id="canvas"></canvas>
+          </div>
+          <div class="chatContainer">
+              <div class="chatMessages">
+              <div class="message">
+                  <p class="meta">Andressa <span>14:36</span></p>
+                  <p class="text">
+                      This is a comment.
+                    </p>
+                </div>
+                <div class="message">
+                    <p class="meta">Richie <span>14:45</span></p>
+                    <p class="text">
+                        This is another comment.
+                      </p>
+                  </div>
+                </div>
+                <div class="chatInput">
+                    <form id="chatForm">
+                        <input
+                          id="msg"
+                          type="text"
+                          placeholder="Enter message"
+                          required
+                          autocomplete="off"
+                        />
+                        <button class="btn">Send</button>
+                      </form>
+                </div>
+            </div>
+        </main>
+      </div>
     </div>
     <script src="socket.io.js"></script>
-    <script src='index.js'></script>
-</body>
+    <script src="index.js"></script>
+  </body>
 </html>
