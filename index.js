@@ -10,6 +10,7 @@ socket.on('gameState', handleGameState);
 socket.on('gameOver', handleGameOver);
 socket.on('gameCode', handleGameCode);
 socket.on('unknownCode', handleUnknownCode);
+socket.on('gameScore', handleScore);
 socket.on('tooManyPlayers', handleTooManyPlayers);
 
 const gameScreen = document.getElementById('gameScreen');
@@ -129,4 +130,15 @@ function reset() {
   gameCodeInput.value = '';
   initialScreen.style.display = "block";
   gameScreen.style.display = "none";
+}
+
+function handleScore(data) {
+  if(!gameActive){
+    return
+  }
+   data = JSON.parse(data)
+   const playersScore = data.map(player => player.score)
+  //  playerOneScore.innerText = playersScore[0]
+  //  playerTwoScore.innerText = playerScore[1]
+   console.log(playersScore[0])
 }
