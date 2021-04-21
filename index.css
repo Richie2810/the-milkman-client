@@ -1,10 +1,203 @@
-#gameScreen{
-    height: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+:root {
+  --dark-color-a: #001b47;
+  --dark-color-b: #173f80;
+  --light-color: #f0f3ff;
 }
 
-#canvasContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  background: var(--light-color);
+  margin: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 5px 15px;
+  background: var(--light-color);
+  color: var(--dark-color-a);
+  border: 0;
+  font-size: 17px;
+  font-family: "Poppins";
+}
+
+/* Initial screen */
+.initialContainer {
+  max-width: 500px;
+  margin: 80px auto;
+  color: #ffffff;
+}
+
+.initialHeader {
+  text-align: center;
+  padding: 20px;
+  background: var(--dark-color-a);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.initialMain {
+  padding: 30px 40px;
+  background: var(--dark-color-b);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.initialMain #or {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.initialMain .formItem {
+  margin-bottom: 10px;
+}
+
+.initialMain label {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 30;
+}
+
+.initialMain input[type="text"] {
+  font-family: "Poppins";
+  font-size: 16px;
+  padding: 5px;
+  padding-left: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+.initialMain select {
+  font-size: 16px;
+  padding: 5px;
+  height: 40px;
+  width: 100%;
+}
+
+.initialMain .btn {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Game screen */
+#gameScreen {
+  height: 100%;
+}
+
+#canvasContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.gameHeader {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--dark-color-b);
+}
+
+.gameHeader h3 {
+  font-weight: 400;
+}
+
+.gameMain {
+  display: flex;
+  justify-content: space-around;
+}
+
+.gameMain .playerScores {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.gameMain .playerScores #scoresTitle {
+  font-weight: bold;
+  color: var(--dark-color-b);
+}
+
+.gameMain .playerScores p {
+  margin-right: 20px;
+}
+
+.gameMain .playerScores .score {
+  font-weight: bold;
+  color: var(--dark-color-b);
+}
+
+.chatContainer {
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 550px;
+  position: relative;
+}
+
+.chatMessages {
+  margin-top: 30px;
+  padding: 0 30px;
+  max-height: 420px;
+  overflow-y: scroll;
+}
+
+.chatMessages .message {
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: var(--light-color);
+  border-radius: 5px;
+}
+
+.chatMessages .message .meta {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark-color-b);
+  opacity: 0.7;
+  margin-bottom: 7px;
+}
+
+.chatMessages .message .meta span {
+  color: #777;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.chatInput {
+  width: 550px;
+  padding: 20px;
+  position: absolute;
+  background-color: var(--dark-color-b);
+  bottom: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.chatInput form {
+  display: flex;
+}
+
+.chatInput input[type="text"] {
+  font-size: 16px;
+  font-family: "Poppins";
+  padding: 9px;
+  border: none;
+  width: 400px;
+  flex: 1;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.chatInput .btn {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
