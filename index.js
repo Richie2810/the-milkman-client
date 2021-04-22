@@ -128,10 +128,9 @@ function handleGameOver(data) {
   gameActive = false;
 
   if (data.winner === playerNumber) {
-    alert("You Win!");
-  } else {
-    alert("You Lose :(");
+    socket.emit("winnerMessage");
   }
+
   playAgain.style.display = "initial";
 }
 
