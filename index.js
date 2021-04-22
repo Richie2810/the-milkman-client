@@ -3,7 +3,8 @@ const PLAYER_1 = "#1cff3e";
 const PLAYER_2 = "#8773d9";
 const FOOD_COLOUR = "#ffee00";
 
-const socket = io("https://multiplayersnakeserver.herokuapp.com/");
+// const socket = io("http://localhost:3000");
+const socket = io("https://multiplayersnakeserver.herokuapp.com");
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
@@ -24,10 +25,12 @@ const nameNewGame = document.getElementById("nameNewGame");
 const nameJoinGame = document.getElementById("nameJoinGame");
 const chatMessages = document.querySelector(".chatMessages");
 const chatForm = document.getElementById("chatForm");
+const playAgain = document.getElementById('playAgain')
 
 newGameForm.addEventListener("submit", newGame);
 joinGameForm.addEventListener("submit", joinGame);
 chatForm.addEventListener("submit", submitMessage);
+playAgain.addEventListener('click', restartGame)
 
 function newGame(e) {
   e.preventDefault();
@@ -45,6 +48,11 @@ function joinGame(e) {
   init();
 }
 
+function restartGame () {
+  socket.emit('restartGame', )
+  init();
+}
+
 let canvas, ctx;
 let playerNumber;
 let gameActive = false;
@@ -52,6 +60,7 @@ let gameActive = false;
 function init() {
   initialScreen.style.display = "none";
   gameScreen.style.display = "block";
+  console.log('here')
 
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
@@ -99,9 +108,6 @@ function handleInit(number) {
 }
 
 function handleGameState(gameState) {
-  if (!gameActive) {
-    return;
-  }
   gameState = JSON.parse(gameState);
   requestAnimationFrame(() => paintGame(gameState));
 }
@@ -150,7 +156,7 @@ function handleScore(data) {
   const playersScore = data.map((player) => player.score);
   playerOneScore.innerText = playersScore[0]
   playerTwoScore.innerText = playersScore[1]
-  console.log(playersScore[0]);
+  //console.log(playersScore[0]);
 }
 
 function handleMessage(message) {
