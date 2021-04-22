@@ -14,7 +14,6 @@ socket.on("unknownCode", handleUnknownCode);
 socket.on("gameScore", handleScore);
 socket.on("tooManyPlayers", handleTooManyPlayers);
 socket.on("message", handleMessage);
-socket.on("showPlayAgain", handleShowPlayAgain);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -27,7 +26,6 @@ const nameJoinGame = document.getElementById("nameJoinGame");
 const chatMessages = document.querySelector(".chatMessages");
 const chatForm = document.getElementById("chatForm");
 const playAgain = document.getElementById("playAgain");
-const playAgainButton = document.getElementById("playAgainButton");
 
 newGameForm.addEventListener("submit", newGame);
 joinGameForm.addEventListener("submit", joinGame);
@@ -66,7 +64,7 @@ playAgain.addEventListener("click", restartGame);
 
 function init() {
   initialScreen.style.display = "none";
-  playAgainButton.style.display = "none";
+  playAgain.style.display = "none";
   gameScreen.style.display = "block";
   console.log("here");
 
@@ -134,6 +132,7 @@ function handleGameOver(data) {
   } else {
     alert("You Lose :(");
   }
+  playAgain.style.display = "initial";
 }
 
 function handleGameCode(gameCode) {
@@ -210,9 +209,4 @@ function outputMessage(message) {
   para.innerText = message.text;
   div.appendChild(para);
   chatMessages.appendChild(div);
-}
-
-function handleShowPlayAgain() {
-  playAgainButton.style.display = "initial";
-  console.log("inside function");
 }
