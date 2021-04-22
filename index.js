@@ -1,7 +1,7 @@
 const BG_COLOUR = "#001b47";
-const PLAYER_1 = "#1cff3e";
-const PLAYER_2 = "#8773d9";
-const FOOD_COLOUR = "#ffee00";
+const PLAYER_1 = "#1fcc3e";
+const PLAYER_2 = "#ff0000";
+const FOOD_COLOUR = "#ffffff";
 
 // const socket = io("http://localhost:3000");
 const socket = io("https://multiplayersnakeserver.herokuapp.com");
@@ -42,6 +42,7 @@ function joinGame(e) {
   e.preventDefault();
   const playerName = nameJoinGame.value;
   const code = gameCodeInput.value;
+  gameCodeDisplay.innerText = code;
   console.log(code);
   socket.emit("joinGame", playerName, code);
   init();
@@ -156,9 +157,6 @@ function reset() {
 }
 
 function handleScore(data) {
-  if (!gameActive) {
-    return;
-  }
   data = JSON.parse(data);
   const playersScore = data.map((player) => player.score);
   playerOneScore.innerText = playersScore[0];

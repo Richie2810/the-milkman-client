@@ -142,6 +142,7 @@ body {
   border-radius: 10px;
   width: 550px;
   position: relative;
+  margin-left: 10px;
 }
 
 .chatMessages {
@@ -173,7 +174,7 @@ body {
 }
 
 .chatInput {
-  width: 550px;
+  width: 100%;
   padding: 20px;
   position: absolute;
   background-color: var(--dark-color-b);
@@ -191,7 +192,7 @@ body {
   font-family: "Poppins";
   padding: 9px;
   border: none;
-  width: 400px;
+  width: 80%;
   flex: 1;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -200,4 +201,29 @@ body {
 .chatInput .btn {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+#playAgain {
+  margin-bottom: 4px;
+  background-color: var(--dark-color-b);
+  color: #ffffff;
+  border-radius: 5px;
+  width: 150px;
+  /* padding: 15px;
+  font-size: 20px; */
+}
+
+.aboveCanvas {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: flex-end;
+}
+
+#playerOne {
+  color: #1fcc3e;
+}
+
+#playerTwo {
+  color: #ff0000;
 }

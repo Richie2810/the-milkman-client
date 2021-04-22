@@ -10,6 +10,9 @@
       #gameScreen {
         display: none;
       }
+      #playAgain {
+              display: none;
+            }
     </style>
   </head>
   <body>
@@ -67,22 +70,29 @@
         </header>
         <main class="gameMain">
           <div id="canvasContainer">
+           <div class="aboveCanvas">
+
             <div class="playerScores">
                 <p id="scoresTitle">Scores</p>
-                <div><p>Player 1</p><p class="score" id="playerOneScore">0</p></div>
-                <div><p>Player 2</p><p class="score" id="playerTwoScore">0</p></div>
-                <div><p>Player 3</p><p class="score" id="playerThreeScore">0</p></div>
-                <div><p>Player 4</p><p class="score" id="playerFourScore">0</p></div>
-            </div>
-            <canvas id="canvas"></canvas>
+                <div><p id="playerOne" >Player 1</p><p class="score" id="playerOneScore">0</p></div>
+                <div><p id="playerTwo">Player 2</p><p class="score" id="playerTwoScore">0</p></div>
+              
+               
+                </div>
+            <div>
+
+                <button  type='submit' class="btn"  id='playAgain'>Play again?</button>
+              </div>
+            
+              </div>
+           
+
+                <canvas id="canvas"></canvas>
+         
           </div>
-          <style>
-            #playAgain {
-              display: none;
-            }
-          </style>
+         
         
-        <button  type='submit' style="border: solid" class="btn"  id='playAgain'>Play again?</button>
+       
      
           <div class="chatContainer">
               <div class="chatMessages"></div>
