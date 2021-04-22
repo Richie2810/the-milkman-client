@@ -3,8 +3,8 @@ const PLAYER_1 = "#1cff3e";
 const PLAYER_2 = "#8773d9";
 const FOOD_COLOUR = "#ffee00";
 
-// const socket = io("http://localhost:3000");
-const socket = io("https://multiplayersnakeserver.herokuapp.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://multiplayersnakeserver.herokuapp.com");
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
@@ -14,6 +14,7 @@ socket.on("unknownCode", handleUnknownCode);
 socket.on("gameScore", handleScore);
 socket.on("tooManyPlayers", handleTooManyPlayers);
 socket.on("message", handleMessage);
+socket.on("showPlayAgain", handleShowPlayAgain);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -25,12 +26,12 @@ const nameNewGame = document.getElementById("nameNewGame");
 const nameJoinGame = document.getElementById("nameJoinGame");
 const chatMessages = document.querySelector(".chatMessages");
 const chatForm = document.getElementById("chatForm");
-const playAgain = document.getElementById('playAgain')
+const playAgain = document.getElementById("playAgain");
+const playAgainButton = document.getElementById("playAgainButton");
 
 newGameForm.addEventListener("submit", newGame);
 joinGameForm.addEventListener("submit", joinGame);
 chatForm.addEventListener("submit", submitMessage);
-playAgain.addEventListener('click', restartGame)
 
 function newGame(e) {
   e.preventDefault();
@@ -48,19 +49,26 @@ function joinGame(e) {
   init();
 }
 
-function restartGame () {
-  socket.emit('restartGame', )
+function restartGame() {
+  if (gameActive) {
+    return;
+  }
+  socket.emit("restartGame");
   init();
 }
 
 let canvas, ctx;
 let playerNumber;
 let gameActive = false;
+console.log("gameactive", gameActive);
+
+playAgain.addEventListener("click", restartGame);
 
 function init() {
   initialScreen.style.display = "none";
+  playAgainButton.style.display = "none";
   gameScreen.style.display = "block";
-  console.log('here')
+  console.log("here");
 
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
@@ -73,6 +81,7 @@ function init() {
 
   document.addEventListener("keydown", keydown);
   gameActive = true;
+  console.log("in init", gameActive);
 }
 
 function keydown(e) {
@@ -154,8 +163,8 @@ function handleScore(data) {
   }
   data = JSON.parse(data);
   const playersScore = data.map((player) => player.score);
-  playerOneScore.innerText = playersScore[0]
-  playerTwoScore.innerText = playersScore[1]
+  playerOneScore.innerText = playersScore[0];
+  playerTwoScore.innerText = playersScore[1];
   //console.log(playersScore[0]);
 }
 
@@ -201,4 +210,9 @@ function outputMessage(message) {
   para.innerText = message.text;
   div.appendChild(para);
   chatMessages.appendChild(div);
+}
+
+function handleShowPlayAgain() {
+  playAgainButton.style.display = "initial";
+  console.log("inside function");
 }
