@@ -49,17 +49,12 @@ function joinGame(e) {
 }
 
 function restartGame() {
-  if (gameActive) {
-    return;
-  }
   socket.emit("restartGame");
   init();
 }
 
 let canvas, ctx;
 let playerNumber;
-let gameActive = false;
-console.log("gameactive", gameActive);
 
 playAgain.addEventListener("click", restartGame);
 
@@ -79,8 +74,6 @@ function init() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   document.addEventListener("keydown", keydown);
-  gameActive = true;
-  console.log("in init", gameActive);
 }
 
 function keydown(e) {
@@ -121,12 +114,7 @@ function handleGameState(gameState) {
 }
 
 function handleGameOver(data) {
-  if (!gameActive) {
-    return;
-  }
   data = JSON.parse(data);
-
-  gameActive = false;
 
   if (data.winner === playerNumber) {
     socket.emit("winnerMessage");
