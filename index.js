@@ -3,8 +3,8 @@ const PLAYER_1 = "#1cff3e";
 const PLAYER_2 = "#8773d9";
 const FOOD_COLOUR = "#ffee00";
 
-const socket = io("http://localhost:3000");
-// const socket = io("https://multiplayersnakeserver.herokuapp.com");
+// const socket = io("http://localhost:3000");
+const socket = io("https://multiplayersnakeserver.herokuapp.com");
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
