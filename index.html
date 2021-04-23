@@ -83,17 +83,20 @@
         <main class="gameMain">
           <div id="canvasContainer">
            <div class="aboveCanvas">
-
             <div class="playerScores">
-                <p id="scoresTitle">                
-                  Milk Collected 
-                                  </p>
-                <div><p id="playerOne" >Player 1</p><p class="score" >
+                 <div><p id="playerOne" >Player 1</p><p class="score" >
                   <img  src="images/favicon.ico" width="15px" height="15px"/> 
-                  <span id="playerOneScore" > 0</span></p></div>
+                  <span id="playerOneScore" > 0 </span> &nbsp;
+                  <img  src="images/winner.ico" width="15px" height="15px"/> 
+                  <span id="playerOneWinner" > 0</span>
+                </p></div>
                 <div><p id="playerTwo">Player 2</p><p class="score" >
                   <img  src="images/favicon.ico" width="15px" height="15px"/>
-                  <span id="playerTwoScore" > 0</span></p></div>
+                  <span id="playerTwoScore" > 0</span>
+                  &nbsp;
+                  <img  src="images/winner.ico" width="15px" height="15px"/> 
+                  <span id="playerTwoWinner" > 0</span>
+                </p></div>
               
                
                 </div>
@@ -111,9 +114,11 @@
          
         
        
+          
      
+
           <div class="chatContainer">
-              <div class="chatMessages"></div>
+             <div class="chatMessages"></div>
                 <div class="chatInput">
                     <form id="chatForm">
                         <input

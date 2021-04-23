@@ -17,6 +17,7 @@ socket.on("tooManyPlayers", handleTooManyPlayers);
 socket.on("message", handleMessage);
 socket.on("gameActive", handleGameActive);
 socket.on("playersNames", handlePlayersNames);
+socket.on("playerWins", handlePlayersWins);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -107,9 +108,6 @@ function paintGame(state) {
   const size = canvas.width / gridsize;
 
   ctx.drawImage(image, food.x * size, food.y * size, size, size);
-  // ctx.fillStyle = FOOD_COLOUR;
-  // ctx.fillRect(food.x * size, food.y * size, size, size);
-
   paintPlayer(state.players[0], size, PLAYER_1);
   paintPlayer(state.players[1], size, PLAYER_2);
 }
@@ -137,8 +135,8 @@ function handleGameOver(data) {
 
   if (data.winner === playerNumber) {
     socket.emit("winnerMessage");
+    socket.emit("playerWon");
   }
-
   playAgain.style.display = "initial";
 }
 
@@ -168,7 +166,6 @@ function handleScore(data) {
   const playersScore = data.map((player) => player.score);
   playerOneScore.innerText = playersScore[0];
   playerTwoScore.innerText = playersScore[1];
-  //console.log(playersScore[0]);
 }
 
 function handlePlayersNames(data) {
@@ -179,8 +176,12 @@ function handlePlayersNames(data) {
     playerOne.innerText = players[0].playername;
     playerTwo.innerText = players[1].playername;
   }
-  console.log("players", players);
-  console.log("data", data);
+}
+
+function handlePlayersWins(data) {
+  const players = JSON.parse(data);
+  playerOneWinner.innerText = players[0].timesWon;
+  playerTwoWinner.innerText = players[1].timesWon;
 }
 
 function handleMessage(message) {
