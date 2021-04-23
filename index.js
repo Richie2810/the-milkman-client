@@ -16,6 +16,7 @@ socket.on("gameScore", handleScore);
 socket.on("tooManyPlayers", handleTooManyPlayers);
 socket.on("message", handleMessage);
 socket.on("gameActive", handleGameActive);
+socket.on("playersNames", handlePlayersNames);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -168,6 +169,18 @@ function handleScore(data) {
   playerOneScore.innerText = playersScore[0];
   playerTwoScore.innerText = playersScore[1];
   //console.log(playersScore[0]);
+}
+
+function handlePlayersNames(data) {
+  const players = JSON.parse(data);
+  if (players.length === 1) {
+    playerOne.innerText = players[0].playername;
+  } else {
+    playerOne.innerText = players[0].playername;
+    playerTwo.innerText = players[1].playername;
+  }
+  console.log("players", players);
+  console.log("data", data);
 }
 
 function handleMessage(message) {
