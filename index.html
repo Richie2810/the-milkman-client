@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
-    <title>Document</title>
+    <title>The Milkman</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" /> 
     <style>
       #gameScreen {
         display: none;
@@ -20,8 +21,13 @@
       <div class="initialContainer">
         <header class="initialHeader">
           <h1>The Milkman</h1>
+          <img id="milk" src="images/favicon.ico" width="40px" height="40px" />
+          
         </header>
         <main class="initialMain">
+          <p id="welcomeText">
+            Play against your friend and try to collect as much milk as possible. 
+            But don’t run into yourself, your friend or the wall because then you lose!</p>
           <form id="newGameForm">
             <div class="formItem">
               <label for="name">Name</label>
@@ -36,6 +42,7 @@
             <button type="submit" class="btn">Create new game</button>
           </form>
           <p id="or">or</p>
+          
           <form id="joinGameForm">
             <div class="formItem">
               <label for="name">Name</label>
@@ -65,7 +72,12 @@
     <div id="gameScreen">
       <div class="gameContainer">
         <header class="gameHeader">
+         <div id="gameHeaderTitle">
           <h1>The Milkman</h1>
+          <img  src="images/favicon.ico" width="30px" height="30px"/>
+           
+        </div>
+         
           <h3>Your game code is: <span id="gameCodeDisplay"></span></h1>
         </header>
         <main class="gameMain">
@@ -73,9 +85,15 @@
            <div class="aboveCanvas">
 
             <div class="playerScores">
-                <p id="scoresTitle">Scores</p>
-                <div><p id="playerOne" >Player 1</p><p class="score" id="playerOneScore">0</p></div>
-                <div><p id="playerTwo">Player 2</p><p class="score" id="playerTwoScore">0</p></div>
+                <p id="scoresTitle">                
+                  Milk Collected 
+                                  </p>
+                <div><p id="playerOne" >Player 1</p><p class="score" >
+                  <img  src="images/favicon.ico" width="15px" height="15px"/> 
+                  <span id="playerOneScore" > 0</span></p></div>
+                <div><p id="playerTwo">Player 2</p><p class="score" >
+                  <img  src="images/favicon.ico" width="15px" height="15px"/>
+                  <span id="playerTwoScore" > 0</span></p></div>
               
                
                 </div>

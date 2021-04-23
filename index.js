@@ -2,6 +2,7 @@ const BG_COLOUR = "#001b47";
 const PLAYER_1 = "#1fcc3e";
 const PLAYER_2 = "#ff0000";
 const FOOD_COLOUR = "#ffffff";
+const image = document.getElementById("milk");
 
 // const socket = io("http://localhost:3000");
 const socket = io("https://multiplayersnakeserver.herokuapp.com");
@@ -89,8 +90,9 @@ function paintGame(state) {
   const gridsize = state.gridsize;
   const size = canvas.width / gridsize;
 
-  ctx.fillStyle = FOOD_COLOUR;
-  ctx.fillRect(food.x * size, food.y * size, size, size);
+  ctx.drawImage(image, food.x * size, food.y * size, size, size);
+  // ctx.fillStyle = FOOD_COLOUR;
+  // ctx.fillRect(food.x * size, food.y * size, size, size);
 
   paintPlayer(state.players[0], size, PLAYER_1);
   paintPlayer(state.players[1], size, PLAYER_2);
