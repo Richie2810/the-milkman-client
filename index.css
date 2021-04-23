@@ -108,6 +108,7 @@ body {
   justify-content: center;
   flex-direction: column;
   height: 100%;
+  margin-right: 25px;
 }
 
 .gameHeader {
@@ -128,7 +129,7 @@ body {
 
 .gameMain {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .gameMain .playerScores {
@@ -156,7 +157,7 @@ body {
   border-radius: 10px;
   width: 550px;
   position: relative;
-  margin-left: 10px;
+  margin-left: 25px;
 }
 
 .chatMessages {
