@@ -14,6 +14,7 @@ socket.on("unknownCode", handleUnknownCode);
 socket.on("gameScore", handleScore);
 socket.on("tooManyPlayers", handleTooManyPlayers);
 socket.on("message", handleMessage);
+socket.on("gameActive", handleGameActive);
 
 const gameScreen = document.getElementById("gameScreen");
 const initialScreen = document.getElementById("initialScreen");
@@ -194,4 +195,8 @@ function outputMessage(message) {
   para.innerText = message.text;
   div.appendChild(para);
   chatMessages.appendChild(div);
+}
+
+function handleGameActive() {
+  playAgain.style.display = "none";
 }
