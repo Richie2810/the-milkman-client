@@ -78,8 +78,23 @@ function init() {
   document.addEventListener("keydown", keydown);
 }
 
+const keysDown = {};
+document.onkeydown = document.onkeyup = function (event) {
+  keysDown[event.code] = event.type == "keydown";
+};
+
 function keydown(e) {
-  socket.emit("keydown", e.keyCode);
+  if (
+    (keysDown["ArrowUp"] && keysDown["ArrowLeft"]) ||
+    (keysDown["ArrowUp"] && keysDown["ArrowRight"]) ||
+    (keysDown["ArrowDown"] && keysDown["ArrowLeft"]) ||
+    (keysDown["ArrowDown"] && keysDown["ArrowRight"])
+  ) {
+    console.log("two keys pressed");
+    return;
+  } else {
+    socket.emit("keydown", e.keyCode);
+  }
 }
 
 function paintGame(state) {
