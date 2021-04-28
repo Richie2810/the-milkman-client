@@ -14,3 +14,7 @@ This app was build for an assignment of the [Codaisseur Academy](https://codaiss
 ### References
 - Snake game is based on [this](https://github.com/HungryTurtleCode/multiplayerSnake) project.
 - Chat is based on [this](https://github.com/bradtraversy/chatcord) project.
+<br/>
+
+
+Click <a href=https://github.com/annadrg/the-milkman-server/>here</a> to go to the server repository.
